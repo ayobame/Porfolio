@@ -44,7 +44,7 @@ Portfolio Reflection:
 This BI project allowed me to demonstrate my skills in data analysis, visualization, and strategic business recommendations. It stands as a testament to my ability to translate complex data into actionable business insights, proving valuable in my career as a Business Intelligence Analyst.
 
 Contact Information:
-[Your LinkedIn Profile]
+https://www.linkedin.com/in/ayobamiadeyeye/
 adeoluadeyeye@outlook.com
 
 End of Read Me.
