@@ -3,7 +3,7 @@ Read Me: Business Intelligence Project - Sabadex Sales Insight
 Project Title: Sabadex Sales Insight
 Project Type: Business Intelligence Analysis
 Author: Adeolu.A. Adeyeye
-Date: 01/12/2023
+Date: 01/12/2023 (Will be updated frequently)
 
 Project Overview:
 This Business Intelligence (BI) project, titled 'Sabadex Sales Insight,' focuses on analyzing and deriving insights from Sabadex's diverse business operations. The project encompassed a comprehensive analysis of sales data, customer demographics, marketing effectiveness, sales team performance, and operational efficiency. The primary objective was to provide Sabadex with actionable insights and data-driven recommendations to enhance overall business performance.
@@ -44,7 +44,7 @@ Portfolio Reflection:
 This BI project allowed me to demonstrate my skills in data analysis, visualization, and strategic business recommendations. It stands as a testament to my ability to translate complex data into actionable business insights, proving valuable in my career as a Business Intelligence Analyst.
 
 Contact Information:
-[Your LinkedIn Profile]
+https://www.linkedin.com/in/ayobamiadeyeye/
 adeoluadeyeye@outlook.com
 
 End of Read Me.
