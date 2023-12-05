@@ -1,0 +1,32 @@
+--Sales Data
+Transaction ID: Unique identifier for each sales transaction.
+Product ID: Identifier for the product sold in the transaction.
+Product Category: Category of the product (e.g., Electronics, Apparel).
+Sales Date: Date when the transaction occurred.
+Revenue: Total revenue generated from the transaction.
+Customer ID: Identifier for the customer who made the purchase.
+
+--Customer Data
+Customer ID: Unique identifier for each customer.
+Age: Age of the customer.
+Location: Geographic location of the customer (e.g., city, state).
+Industry: Industry in which the customer operates (if applicable).
+Customer Since: Date when the customer first made a purchase.
+
+--Marketing and Lead Data
+Lead ID: Unique identifier for each sales lead.
+Lead Source: Source from which the lead was generated (e.g., Online Ad, Referral).
+Lead Conversion Date: Date when the lead was converted into a customer.
+Lead Score: Score indicating the potential value or quality of the lead.
+
+--Sales Team Performance Data
+Sales Rep ID: Identifier for each sales representative.
+Number of Leads Handled: Total number of leads handled by the sales rep.
+Number of Successful Conversions: Number of leads that were successfully converted into sales by the rep.
+Total Sales Value: Total value of sales closed by the sales rep.
+
+--Operational Data
+Support Ticket ID: Unique identifier for each customer support ticket.
+Issue Category: Category of the issue reported (e.g., Technical, Billing).
+Resolution Time: Time taken to resolve the support issue.
+Customer Satisfaction Score: Post-resolution customer satisfaction rating.
