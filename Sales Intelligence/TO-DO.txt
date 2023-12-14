@@ -1,0 +1,42 @@
+Week 1
+Day 1 & 2: Project Planning and Strategy Development
+Objective: Define project goals and strategies.
+Tasks:
+Outline the Sales Performance Project.
+Develop the Strategy Document.
+Day 3 & 4: Stakeholder and Project Documentation
+Objective: Establish communication and reporting structures.
+Tasks:
+Create the Stakeholder Document.
+Draft the initial Project Document.
+Day 5 & 6: Database and SQL Scripting
+Objective: Lay the groundwork for data analysis.
+Tasks:
+Set up the database for sales data.
+Write initial SQL queries for data extraction.
+Day 7: Review and Adjustments
+Objective: Assess progress and make necessary adjustments.
+Tasks:
+Review the work completed.
+Update documents and plans as needed.
+Week 2
+Day 8 & 9: Python Scripting for Data Analysis
+Objective: Develop scripts for data processing and analysis.
+Tasks:
+Write Python scripts for data cleaning and analysis.
+Day 10 & 11: PowerBI Dashboard Development
+Objective: Visualize data for insights.
+Tasks:
+Design and create a dashboard in PowerBI.
+Day 12 & 13: Tableau Dashboard Development
+Objective: Complement data visualization with another tool.
+Tasks:
+Develop a complementary dashboard in Tableau.
+Day 14: Finalizing C-Suite Report and Review
+Objective: Prepare and review the final report for executive presentation.
+Tasks:
+Compile insights and data into a C-Suite Report.
+Conduct a final review of all documents and dashboards.
+Daily Routine
+First Hour: Work on the main task of the day.
+Second Hour: Review progress, document work, and plan for the next session.
