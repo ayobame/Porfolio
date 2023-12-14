@@ -1,0 +1,484 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Advanced Statistical Analysis and Modeling: Exploring Real-World
+Data with R}
+\author{Ayobami Adeyeye}
+\date{April 2021}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Advanced Statistical Analysis and Modeling: Exploring Real-World Data with R},
+  pdfauthor={Ayobami Adeyeye},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{executive-summary}{%
+\section{Executive Summary}\label{executive-summary}}
+
+This project analyzes the ``USSeatBelts.csv'' dataset to evaluate
+factors influencing road safety, with a focus on seatbelt usage and its
+impact on road fatalities. Using R for data analysis and modeling, the
+study employs Generalized Linear Models (GLM) and correlation analysis
+to uncover key relationships. Findings indicate a significant
+correlation between seatbelt usage and reduced road fatalities,
+highlighting the effectiveness of safety measures. The study provides
+valuable insights for policymakers and road safety advocates,
+emphasizing the critical role of seat belt legislation in enhancing road
+safety.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\textbf{Background:} Road safety is a paramount concern globally, with
+significant implications for public health and policy. This study
+underscores the importance of statistical analysis in understanding and
+mitigating road fatalities.
+
+\textbf{Problem Statement:} The primary inquiry of this case study is to
+determine the key factors influencing road fatalities, including the
+role of seat belt usage, and to predict their effects effectively.
+
+\hypertarget{data-overview}{%
+\subsection{Data Overview:}\label{data-overview}}
+
+\textbf{Data Source:} The `USSeatBelts.csv' dataset, comprising various
+variables related to road safety.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# data source https://vincentarelbundock.github.io/Rdatasets/datasets.html}
+\CommentTok{\# This code reads the \textquotesingle{}USSeatBelts.csv\textquotesingle{} file into R as a dataframe named \textquotesingle{}dataset\textquotesingle{}}
+\NormalTok{dataset }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"USSeatBelts.csv"}\NormalTok{)}
+
+\CommentTok{\# Removes all rows with NA (missing) values.}
+\NormalTok{dataset }\OtherTok{=} \FunctionTok{na.omit}\NormalTok{(dataset)}
+
+\CommentTok{\#unction displays the first 5 rows of the dataset for a preliminary view.}
+\FunctionTok{head}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    rownames state year miles fatalities seatbelt speed65 speed70 drinkage
+## 8         8    AK 1990  3979 0.02462930     0.45      no      no      yes
+## 9         9    AK 1991  4021 0.02511813     0.66      no      no      yes
+## 10       10    AK 1992  3841 0.02811768     0.66     yes      no      yes
+## 11       11    AK 1993  3918 0.03011741     0.69     yes      no      yes
+## 12       12    AK 1994  4150 0.02048193     0.69     yes      no      yes
+## 13       13    AK 1995  4123 0.02110114     0.69     yes      no      yes
+##    alcohol income      age   enforce
+## 8       no  21073 29.58628        no
+## 9       no  21496 29.82771 secondary
+## 10      no  22073 30.21070 secondary
+## 11      no  22711 30.46439 secondary
+## 12      no  23417 30.75657 secondary
+## 13      no  23971 31.17860 secondary
+\end{verbatim}
+
+\textbf{Data Preparation:} The data preparation involved cleaning,
+handling missing values, and structuring the data for analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Function provides a detailed summary of the dataset, including data types, missing values, and basic statistics}
+\NormalTok{skimr}\SpecialCharTok{::}\FunctionTok{skim}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule
+\endhead
+Name & dataset \\
+Number of rows & 556 \\
+Number of columns & 13 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+character & 6 \\
+numeric & 7 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule
+\end{longtable}
+
+\textbf{Variable type: character}
+
+\begin{longtable}[]{@{}lrrrrrrr@{}}
+\toprule
+skim\_variable & n\_missing & complete\_rate & min & max & empty &
+n\_unique & whitespace \\
+\midrule
+\endhead
+state & 0 & 1 & 2 & 2 & 0 & 51 & 0 \\
+speed65 & 0 & 1 & 2 & 3 & 0 & 2 & 0 \\
+speed70 & 0 & 1 & 2 & 3 & 0 & 2 & 0 \\
+drinkage & 0 & 1 & 2 & 3 & 0 & 2 & 0 \\
+alcohol & 0 & 1 & 2 & 3 & 0 & 2 & 0 \\
+enforce & 0 & 1 & 2 & 9 & 0 & 3 & 0 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}lrrrrrrrrrl@{}}
+\toprule
+skim\_variable & n\_missing & complete\_rate & mean & sd & p0 & p25 &
+p50 & p75 & p100 & hist \\
+\midrule
+\endhead
+rownames & 0 & 1 & 378.53 & 213.14 & 8.00 & 201.75 & 373.50 & 548.25 &
+765.00 & ▆▇▇▇▆ \\
+year & 0 & 1 & 1991.74 & 3.63 & 1983.00 & 1989.00 & 1992.00 & 1995.00 &
+1997.00 & ▂▅▇▇▇ \\
+miles & 0 & 1 & 46134.23 & 46554.86 & 3316.00 & 13004.50 & 35143.00 &
+59968.00 & 285612.00 & ▇▂▁▁▁ \\
+fatalities & 0 & 1 & 0.02 & 0.01 & 0.01 & 0.02 & 0.02 & 0.02 & 0.04 &
+▂▇▇▂▁ \\
+seatbelt & 0 & 1 & 0.53 & 0.17 & 0.06 & 0.42 & 0.55 & 0.65 & 0.87 &
+▁▃▆▇▂ \\
+income & 0 & 1 & 19572.16 & 4423.43 & 9696.00 & 16475.75 & 19202.00 &
+22320.75 & 35863.00 & ▂▇▆▁▁ \\
+age & 0 & 1 & 35.47 & 1.44 & 29.59 & 34.73 & 35.59 & 36.27 & 39.17 &
+▁▁▆▇▂ \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{methodology}{%
+\subsection{Methodology:}\label{methodology}}
+
+\textbf{Statistical Techniques Used:} The study employed methods like
+GLM and correlation analysis to evaluate the data. The choice of these
+methods was based on their suitability for analyzing relationships
+within the dataset.
+
+\textbf{Implementation in R:} The analysis was carried out in R, with a
+focus on leveraging its statistical capabilities for accurate data
+interpretation. Code snippets illustrate the application of these
+methods.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creates a new dataframe \textquotesingle{}num\textquotesingle{} with numeric columns from \textquotesingle{}dataset}
+\NormalTok{num}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{year, dataset}\SpecialCharTok{$}\NormalTok{miles, dataset}\SpecialCharTok{$}\NormalTok{fatalities, dataset}\SpecialCharTok{$}\NormalTok{seatbelt, dataset}\SpecialCharTok{$}\NormalTok{income, dataset}\SpecialCharTok{$}\NormalTok{age)}
+\CommentTok{\# calculates the correlation matrix of \textquotesingle{}num\textquotesingle{} and stores it in \textquotesingle{}ncor\textquotesingle{}}
+\NormalTok{ncor}\OtherTok{=}\FunctionTok{cor}\NormalTok{(num)}
+\CommentTok{\#  visualizes this correlation matrix.}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.92 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{corrplot}\NormalTok{(ncor)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stat-analytics_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ncor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    dataset.year dataset.miles dataset.fatalities
+## dataset.year         1.00000000    0.02296322         -0.4752451
+## dataset.miles        0.02296322    1.00000000         -0.1113372
+## dataset.fatalities  -0.47524506   -0.11133720          1.0000000
+## dataset.seatbelt     0.67923708    0.20653078         -0.4027138
+## dataset.income       0.69657763    0.15811522         -0.6928618
+## dataset.age          0.27978679    0.01618082         -0.2730244
+##                    dataset.seatbelt dataset.income dataset.age
+## dataset.year              0.6792371      0.6965776  0.27978679
+## dataset.miles             0.2065308      0.1581152  0.01618082
+## dataset.fatalities       -0.4027138     -0.6928618 -0.27302440
+## dataset.seatbelt          1.0000000      0.6223398  0.15895198
+## dataset.income            0.6223398      1.0000000  0.36223372
+## dataset.age               0.1589520      0.3622337  1.00000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# prepares data for the GLM analysis by selecting relevant variables and creating a new dataframe \textquotesingle{}df\textquotesingle{}}
+\NormalTok{x1 }\OtherTok{=}\NormalTok{ dataset}\SpecialCharTok{$}\NormalTok{seatbelt}
+\NormalTok{x2 }\OtherTok{=} \FunctionTok{as.factor}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{speed70)}
+\NormalTok{x3 }\OtherTok{=}\NormalTok{ dataset}\SpecialCharTok{$}\NormalTok{alcohol}
+\NormalTok{y }\OtherTok{=}\NormalTok{  dataset}\SpecialCharTok{$}\NormalTok{fatalities}
+\NormalTok{df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(x1, x2, x3, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-trained-using-80-of-this-dataset-and-suggest-an-appropriate-glm-to-model-ouput-to-input-variables.}{%
+\subsubsection{Model trained using 80\% of this dataset and suggest an
+appropriate GLM to model ouput to input
+variables.}\label{model-trained-using-80-of-this-dataset-and-suggest-an-appropriate-glm-to-model-ouput-to-input-variables.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sets a seed for reproducibility.}
+\CommentTok{\# Splits the data into training (80\%) and testing (20\%) sets.}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{n}\OtherTok{=}\FunctionTok{nrow}\NormalTok{(df)}
+\NormalTok{indexes }\OtherTok{=} \FunctionTok{sample}\NormalTok{(n,n}\SpecialCharTok{*}\NormalTok{(}\DecValTok{80}\SpecialCharTok{/}\DecValTok{100}\NormalTok{))}
+\NormalTok{trainset }\OtherTok{=}\NormalTok{ df[indexes,]}
+\NormalTok{testset }\OtherTok{=}\NormalTok{ df[}\SpecialCharTok{{-}}\NormalTok{indexes,]}
+\FunctionTok{dim}\NormalTok{(testset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 112   4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(trainset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 444   4
+\end{verbatim}
+
+Specified the significant variables on the output variable at the level
+of 𝛼=0.05 and explored the related hypotheses test, estimating the
+parameters of your model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Fits a GLM on the training set and displays the summary of the model.}
+\NormalTok{dataglm }\OtherTok{=} \FunctionTok{glm}\NormalTok{(y}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,trainset,}\AttributeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(dataglm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ ., family = "gaussian", data = trainset)
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.0260988  0.0007622  34.242  < 2e-16 ***
+## x1          -0.0117400  0.0013896  -8.449 4.35e-16 ***
+## x2yes        0.0014684  0.0007395   1.986  0.04770 *  
+## x3yes       -0.0020702  0.0006527  -3.172  0.00162 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 2.164909e-05)
+## 
+##     Null deviance: 0.0115069  on 443  degrees of freedom
+## Residual deviance: 0.0095256  on 440  degrees of freedom
+## AIC: -3502.8
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\hypertarget{predict-the-output-of-the-test-dataset-using-the-trained-model.-provide-the-functional-form-of-the-optimal-predictive-model.}{%
+\subsection{Predict the output of the test dataset using the trained
+model. Provide the functional form of the optimal predictive
+model.}\label{predict-the-output-of-the-test-dataset-using-the-trained-model.-provide-the-functional-form-of-the-optimal-predictive-model.}}
+
+\[yhati=0.026+-0.011x_{1i}+0.001x_{2i}+-0.002x_{3i}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Predicts fatalities using the fitted GLM on the test set.}
+\CommentTok{\#Compares predictions (\textquotesingle{}pred\textquotesingle{}) with actual values (\textquotesingle{}actual\textquotesingle{}) and shows the first few predictions.}
+
+\NormalTok{pred}\OtherTok{=}\FunctionTok{predict}\NormalTok{(dataglm,testset)}
+\NormalTok{actual}\OtherTok{=}\NormalTok{testset}\SpecialCharTok{$}\NormalTok{y}
+\NormalTok{values}\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(pred,actual)}
+\FunctionTok{head}\NormalTok{(values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          pred     actual
+## 1  0.02081575 0.02462930
+## 2  0.01835034 0.02511813
+## 9  0.02457256 0.02827584
+## 15 0.02093315 0.02647177
+## 17 0.01928954 0.02252961
+## 18 0.01964174 0.02205463
+\end{verbatim}
+
+\hypertarget{d-provide-the-confusion-matrix-and-obtain-the-probability-of-correctness-of-predictions.}{%
+\subsection{d) Provide the confusion matrix and obtain the probability
+of correctness of
+predictions.}\label{d-provide-the-confusion-matrix-and-obtain-the-probability-of-correctness-of-predictions.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Calculates the Root Mean Square Error (RMSE) to evaluate the model\textquotesingle{}s predictive accuracy.}
+\NormalTok{RMSE}\OtherTok{=}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{(pred}\SpecialCharTok{{-}}\NormalTok{actual)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(actual))}
+\NormalTok{RMSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0007943193
+\end{verbatim}
+
+\hypertarget{plotting-observed-vs.-predicted-values}{%
+\subsubsection{Plotting Observed vs.~Predicted
+Values}\label{plotting-observed-vs.-predicted-values}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predict values using the GLM model}
+\NormalTok{predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(dataglm, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\CommentTok{\# Plotting observed vs. predicted values}
+\FunctionTok{plot}\NormalTok{(actual, pred, }\AttributeTok{xlab =} \StringTok{"Observed Fatalities"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Predicted Fatalities"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Observed vs Predicted Fatalities"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stat-analytics_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\hypertarget{residuals-plot}{%
+\subsubsection{Residuals Plot:}\label{residuals-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculating residuals}
+\NormalTok{residuals }\OtherTok{=}\NormalTok{ actual }\SpecialCharTok{{-}}\NormalTok{ pred}
+
+\CommentTok{\# Plotting residuals}
+\FunctionTok{plot}\NormalTok{(pred, residuals, }\AttributeTok{xlab =} \StringTok{"Predicted Fatalities"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Residuals"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Residuals vs Predicted Fatalities"}\NormalTok{)}
+
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stat-analytics_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\hypertarget{diagnostic-plots}{%
+\subsubsection{Diagnostic Plots:}\label{diagnostic-plots}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(dataglm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stat-analytics_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\end{document}
