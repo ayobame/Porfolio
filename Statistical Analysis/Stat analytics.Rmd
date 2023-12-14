@@ -1,0 +1,161 @@
+---
+title: "Advanced Statistical Analysis and Modeling: Exploring Real-World Data with R"
+author: "Ayobami Adeyeye"
+date: "April 2021"
+output:
+  html_document:
+    toc: yes
+    theme: united
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Executive Summary
+
+This project analyzes the "USSeatBelts.csv" dataset to evaluate factors influencing road safety, with a focus on seatbelt usage and its impact on road fatalities. Using R for data analysis and modeling, the study employs Generalized Linear Models (GLM) and correlation analysis to uncover key relationships. Findings indicate a significant correlation between seatbelt usage and reduced road fatalities, highlighting the effectiveness of safety measures. The study provides valuable insights for policymakers and road safety advocates, emphasizing the critical role of seat belt legislation in enhancing road safety.
+
+# Introduction
+
+**Background:** Road safety is a paramount concern globally, with significant implications for public health and policy. This study underscores the importance of statistical analysis in understanding and mitigating road fatalities.
+
+**Problem Statement:** The primary inquiry of this case study is to determine the key factors influencing road fatalities, including the role of seat belt usage, and to predict their effects effectively.
+
+
+## Data Overview:
+
+**Data Source:** The 'USSeatBelts.csv' dataset, comprising various variables related to road safety.
+```{r}
+# data source https://vincentarelbundock.github.io/Rdatasets/datasets.html
+# This code reads the 'USSeatBelts.csv' file into R as a dataframe named 'dataset'
+dataset = read.csv("USSeatBelts.csv")
+
+# Removes all rows with NA (missing) values.
+dataset = na.omit(dataset)
+
+#unction displays the first 5 rows of the dataset for a preliminary view.
+head(dataset)
+
+```
+
+**Data Preparation:** The data preparation involved cleaning, handling missing values, and structuring the data for analysis.
+```{r}
+# Function provides a detailed summary of the dataset, including data types, missing values, and basic statistics
+skimr::skim(dataset)
+```
+
+## Methodology:
+
+**Statistical Techniques Used:** The study employed methods like GLM and correlation analysis to evaluate the data. The choice of these methods was based on their suitability for analyzing relationships within the dataset.
+
+**Implementation in R:** The analysis was carried out in R, with a focus on leveraging its statistical capabilities for accurate data interpretation. Code snippets illustrate the application of these methods.
+
+```{r}
+# creates a new dataframe 'num' with numeric columns from 'dataset
+num=data.frame(dataset$year, dataset$miles, dataset$fatalities, dataset$seatbelt, dataset$income, dataset$age)
+# calculates the correlation matrix of 'num' and stores it in 'ncor'
+ncor=cor(num)
+#  visualizes this correlation matrix.
+library(corrplot)
+corrplot(ncor)
+ncor
+```
+
+```{r}
+# prepares data for the GLM analysis by selecting relevant variables and creating a new dataframe 'df'
+x1 = dataset$seatbelt
+x2 = as.factor(dataset$speed70)
+x3 = dataset$alcohol
+y =  dataset$fatalities
+df = data.frame(x1, x2, x3, y)
+
+```
+
+```{r,include=FALSE}
+# Fits a GLM to the data in 'df' with 'y' as the response variable and other columns as predictors.
+dataglm = glm(y~.,df,family = "gaussian")
+#displays the results of the GLM.
+summary(dataglm)
+```
+
+### Model trained using 80% of this dataset and suggest an appropriate GLM to model ouput to input variables.  
+
+```{r}
+# Sets a seed for reproducibility.
+# Splits the data into training (80%) and testing (20%) sets.
+set.seed(123)
+n=nrow(df)
+indexes = sample(n,n*(80/100))
+trainset = df[indexes,]
+testset = df[-indexes,]
+dim(testset)
+dim(trainset)
+```
+
+Specified the significant variables on the output variable at the level of 𝛼=0.05 and explored the related hypotheses test, estimating the parameters of your model.
+
+```{r}
+#Fits a GLM on the training set and displays the summary of the model.
+dataglm = glm(y~.,trainset,family = "gaussian")
+summary(dataglm)
+
+```
+## Predict the output of the test dataset using the trained model. Provide the functional form of the optimal predictive            model. 
+
+$$yhati=0.026+-0.011x_{1i}+0.001x_{2i}+-0.002x_{3i}$$
+
+```{r}
+#Predicts fatalities using the fitted GLM on the test set.
+#Compares predictions ('pred') with actual values ('actual') and shows the first few predictions.
+
+pred=predict(dataglm,testset)
+actual=testset$y
+values= data.frame(pred,actual)
+head(values)
+```
+
+
+## d)	Provide the confusion matrix and obtain the probability of correctness of predictions. 
+
+```{r}
+#Calculates the Root Mean Square Error (RMSE) to evaluate the model's predictive accuracy.
+RMSE=sqrt(sum(pred-actual)^2/length(actual))
+RMSE
+
+```
+
+### Plotting Observed vs. Predicted Values
+```{r}
+# Predict values using the GLM model
+predictions = predict(dataglm, type = "response")
+
+# Plotting observed vs. predicted values
+plot(actual, pred, xlab = "Observed Fatalities", ylab = "Predicted Fatalities", main = "Observed vs Predicted Fatalities")
+abline(0, 1)
+
+```
+
+### Residuals Plot:
+```{r}
+# Calculating residuals
+residuals = actual - pred
+
+# Plotting residuals
+plot(pred, residuals, xlab = "Predicted Fatalities", ylab = "Residuals", main = "Residuals vs Predicted Fatalities")
+
+abline(h = 0)
+
+```
+
+### Diagnostic Plots:
+```{r}
+par(mfrow = c(2, 2))
+plot(dataglm)
+
+```
+
+
+
+
