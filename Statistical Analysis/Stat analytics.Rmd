@@ -4,8 +4,10 @@ title: 'Advanced Statistical Analysis and Modeling: Exploring Real-World Data wi
 author: "Ayobami Adeyeye"
 date: "April 2021"
 output:
-  pdf_document: default
+  html_document: 
+    keep_md: yes
   theme: united
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
