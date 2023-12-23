@@ -46,6 +46,7 @@ head(dataset)
 ```{r}
 # Function provides a detailed summary of the dataset, including data types, missing values, and basic statistics
 skimr::skim(dataset)
+
 ```
 
 ## Methodology:
@@ -57,13 +58,17 @@ skimr::skim(dataset)
 ```{r}
 # creates a new dataframe 'num' with numeric columns from 'dataset
 num=data.frame(dataset$year, dataset$miles, dataset$fatalities, dataset$seatbelt, dataset$income, dataset$age)
+
 # calculates the correlation matrix of 'num' and stores it in 'ncor'
 ncor=cor(num)
+
 #  visualizes this correlation matrix.
 library(corrplot)
 corrplot(ncor)
 ncor
 ```
+
+
 
 ```{r}
 # prepares data for the GLM analysis by selecting relevant variables and creating a new dataframe 'df'
