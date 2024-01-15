@@ -3,4 +3,4 @@
 
 ##Content
 + [Advanced Statistical Analysis and Modeling: Exploring Real-World Data with R](http://rpubs.com/ayobame/usseatbelt)
-+ <a href="[placeholder.com](http://rpubs.com/ayobame/usseatbelt)" target="_blank">Advanced Statistical Analysis and Modeling: Exploring Real-World Data with R</a>
++ <a href="http://rpubs.com/ayobame/usseatbelt" target="_blank">Advanced Statistical Analysis and Modeling: Exploring Real-World Data with R</a>
