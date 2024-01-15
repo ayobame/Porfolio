@@ -14,7 +14,7 @@ output:
 
 # Executive Summary
 
-This project analyzes the "USSeatBelts.csv" dataset to evaluate factors influencing road safety, with a focus on seatbelt usage and its impact on road fatalities. Using R for data analysis and modeling, the study employs Generalized Linear Models (GLM) and correlation analysis to uncover key relationships. Findings indicate a significant correlation between seatbelt usage and reduced road fatalities, highlighting the effectiveness of safety measures. The study provides valuable insights for policymakers and road safety advocates, emphasizing the critical role of seat belt legislation in enhancing road safety.
+The analysis of the USSeatBelts dataset aimed to understand the impact of various factors on road fatalities. The focus was on exploring the relationships between variables like year, miles driven, seat belt usage, income, and age with road fatalities.
 
 # Introduction
 
@@ -111,11 +111,15 @@ Table: Data summary
 **Implementation in R:** The analysis was carried out in R, with a focus on leveraging its statistical capabilities for accurate data interpretation. Code snippets illustrate the application of these methods.
 
 
+## Correlation Analysis:
+
 ```r
 # creates a new dataframe 'num' with numeric columns from 'dataset
 num=data.frame(dataset$year, dataset$miles, dataset$fatalities, dataset$seatbelt, dataset$income, dataset$age)
+
 # calculates the correlation matrix of 'num' and stores it in 'ncor'
 ncor=cor(num)
+
 #  visualizes this correlation matrix.
 library(corrplot)
 ```
@@ -152,6 +156,12 @@ ncor
 ```
 
 
++ **Seatbelt Usage and Fatalities:** A significant negative correlation of -0.4027138 was found between seat belt usage and road fatalities, indicating that increased seat belt usage is associated with fewer road deaths.  
++ **Income and Fatalities:** Income showed a strong negative correlation of -0.6928618 with fatalities, suggesting higher income levels may correlate with lower road fatalities.  
++ **Age and Fatalities:** The correlation between age and fatalities was -0.2730244, indicating a moderate negative relationship. 
++  **Year and Seatbelt Usage:** There was a strong positive correlation of 0.6792371 between the year and seat belt usage, implying an increase in seat belt usage over the years.  
+
+
 ```r
 # prepares data for the GLM analysis by selecting relevant variables and creating a new dataframe 'df'
 x1 = dataset$seatbelt
@@ -163,7 +173,7 @@ df = data.frame(x1, x2, x3, y)
 
 
 
-### Model trained using 80% of this dataset and suggest an appropriate GLM to model ouput to input variables.
+**Model trained using 80% of this dataset and suggest an appropriate GLM to model output to input variables.**
 
 
 ```r
@@ -189,7 +199,7 @@ dim(trainset)
 ## [1] 444   4
 ```
 
-Specified the significant variables on the output variable at the level of 𝛼=0.05 and explored the related hypotheses test, estimating the parameters of your model.
+Specified the significant variables on the output variable at the level of 𝛼=0.05 and explored the related hypotheses test, estimating the parameters of the model.
 
 
 ```r
@@ -221,7 +231,9 @@ summary(dataglm)
 ## Number of Fisher Scoring iterations: 2
 ```
 
-## Predict the output of the test dataset using the trained model. Provide the functional form of the optimal predictive model.
+### Predicting output of test dataset using trained model.  
+
+**Functional form of the optimal predictive model.**
 
 $$yhati=0.026+-0.011x_{1i}+0.001x_{2i}+-0.002x_{3i}$$
 
@@ -246,7 +258,7 @@ head(values)
 ## 18 0.01964174 0.02205463
 ```
 
-## d) Provide the confusion matrix and obtain the probability of correctness of predictions.
+### RMSE
 
 
 ```r
@@ -258,6 +270,7 @@ RMSE
 ```
 ## [1] 0.0007943193
 ```
+The Root Mean Square Error (RMSE) of the model demonstrates the model's high accuracy in predicting road fatalities
 
 ### Plotting Observed vs. Predicted Values
 
@@ -297,3 +310,12 @@ plot(dataglm)
 ```
 
 ![](Stat-analytics_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+## Implications and Recommendations
++ The strong correlation between seatbelt usage and reduced fatalities underscores the importance of policies promoting seatbelt use.  
++ The negative correlation between income and fatalities suggests socio-economic factors may play a role in road safety.  
++ The GLM results highlight the significant impact of seatbelt usage, speed limits, and alcohol consumption on road fatalities. These insights can inform targeted road safety campaigns and policy decisions.  
++ Continued monitoring and analysis of these variables are recommended to further understand their long-term trends and impacts.
+
+## Conclusion
+The statistical analysis provided valuable insights into the factors affecting road safety. Seatbelt usage emerged as a key variable, along with income and age, in influencing road fatalities. The findings can guide future policy decisions and road safety measures to reduce fatalities effectively.
